@@ -1,21 +1,48 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "sort.h"
-
 /**
- * main - entry point
- *
- * Return: always (0)
+ * swap_ints - Swap two integers in an array.
+ * @a: The first integer to swap.
+ * @b: The second integer to swap.
  */
-int main(void)
+void swap_ints(int *a, int *b)
 {
-    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
-    size_t n = sizeof(array) / sizeof(array[0]);
+	int tmp;
 
-    print_array(array, n);
-    printf("\n");
-    bubble_sort(array, n);
-    printf("\n");
-    print_array(array, n);
-    return (0);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+/**
+ * bubble_sort - Sort an array of integers in ascending order.
+ * @array: An array of integers to sort.
+ * @size: The size of the array.
+ *
+ * Description: Prints the array after each swap.
+ */
+
+/*
+Time Complexity: O(n^2)
+*/
+void bubble_sort(int *array, size_t size)
+{
+	size_t i, len = size;
+	bool bubbly = false;
+
+	if (array == NULL || size < 2)
+		return;
+
+	while (bubbly == false)
+	{
+		bubbly = true;
+		for (i = 0; i < len - 1; i++)
+		{
+			if (array[i] > array[i + 1])
+			{
+				swap_ints(array + i, array + i + 1);
+				print_array(array, size);
+				bubbly = false;
+			}
+		}
+		len--;
+	}
 }
